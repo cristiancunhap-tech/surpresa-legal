@@ -1,0 +1,722 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap');
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+    width: 100%;
+
+    font-family: "DM Sans", sans-serif;
+
+    background: #fff8fa;
+
+    color: #5c4850;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PRIMEIRA TELA
+========================= */
+
+.hero {
+    min-height: 100svh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    padding: clamp(32px, 8vw, 80px) 16px;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #ffe9f0 0%,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            #fce3eb 0%,
+            transparent 30%
+        ),
+        #fff8fa;
+
+    transition: opacity 1s ease;
+}
+
+
+.intro {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+    width: min(100%, 760px);
+
+    z-index: 5;
+}
+
+
+.small-text {
+    margin-bottom: 35px;
+
+    font-size: clamp(14px, 4vw, 15px);
+
+    letter-spacing: 1px;
+    text-align: center;
+
+    color: #a88391;
+}
+
+
+/* =========================
+   CARTA
+========================= */
+
+.letter {
+    --letter-width: clamp(240px, 78vw, 360px);
+    --letter-height: calc(var(--letter-width) * 0.6667);
+
+    display: block;
+
+    width: var(--letter-width);
+    height: var(--letter-height);
+    padding: 0;
+
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+
+    perspective: 1000px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.letter:focus-visible {
+    outline: 3px solid rgba(189, 113, 137, 0.5);
+    outline-offset: 8px;
+    border-radius: 8px;
+}
+
+
+.letter-front {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    position: relative;
+
+    background: #f7dce5;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 25px 50px rgba(130, 80, 100, 0.18);
+
+    transition:
+        transform 1s ease,
+        box-shadow 1s ease;
+}
+
+
+/* Aba */
+
+.letter-flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: calc(var(--letter-width) / 2) solid transparent;
+    border-right: calc(var(--letter-width) / 2) solid transparent;
+    border-top: calc(var(--letter-height) * 0.52) solid #edbdce;
+
+    transform-origin: top;
+
+    transition:
+        transform 1s ease;
+
+    z-index: 3;
+}
+
+
+/* Parte interna */
+
+.letter-front::before {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    border-left: calc(var(--letter-width) / 2) solid #f3ccd9;
+    border-top: calc(var(--letter-height) * 0.5) solid transparent;
+
+    z-index: 2;
+}
+
+
+.letter-front::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    right: 0;
+
+    border-right: calc(var(--letter-width) / 2) solid #f3ccd9;
+    border-top: calc(var(--letter-height) * 0.5) solid transparent;
+
+    z-index: 2;
+}
+
+
+/* Conteúdo */
+
+.letter-content {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 4;
+
+    color: #805a67;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+
+.letter-content span {
+    font-size: 35px;
+
+    margin-bottom: 10px;
+}
+
+
+.letter-content p,
+.letter-title {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(22px, 7vw, 27px);
+}
+
+
+.letter-content small {
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================
+   CARTA ABERTA
+========================= */
+
+.letter.open .letter-flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+}
+
+
+.letter.open .letter-content {
+    opacity: 0;
+}
+
+
+.letter.open .letter-front {
+    box-shadow:
+        0 35px 70px rgba(130, 80, 100, 0.22);
+}
+
+
+/* =========================
+   HINT
+========================= */
+
+.click-hint {
+    margin-top: 30px;
+
+    font-size: 12px;
+
+    color: #b18d99;
+
+    letter-spacing: 1px;
+
+    animation: pulse 2s infinite;
+}
+
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================
+   DECORAÇÕES
+========================= */
+
+.decorations span {
+    position: absolute;
+
+    user-select: none;
+
+    pointer-events: none;
+}
+
+
+.heart {
+    color: #e9a9bb;
+
+    font-size: 40px;
+
+    animation: float 5s ease-in-out infinite;
+}
+
+
+.heart-1 {
+    top: 18%;
+    left: 12%;
+}
+
+
+.heart-2 {
+    bottom: 18%;
+    right: 13%;
+
+    font-size: 25px;
+}
+
+
+.star {
+    color: #d9a7b7;
+
+    font-size: 28px;
+
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+
+.star-1 {
+    top: 25%;
+    right: 17%;
+}
+
+
+.star-2 {
+    bottom: 25%;
+    left: 17%;
+
+    animation-delay: 1s;
+}
+
+
+.star-3 {
+    top: 12%;
+    left: 30%;
+
+    font-size: 18px;
+
+    animation-delay: 2s;
+}
+
+
+.flower {
+    font-size: 35px;
+
+    animation: float 6s ease-in-out infinite;
+}
+
+
+.flower-1 {
+    bottom: 12%;
+    left: 10%;
+}
+
+
+.flower-2 {
+    top: 15%;
+    right: 8%;
+
+    animation-delay: 2s;
+}
+
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform: scale(1.2);
+    }
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.message {
+    min-height: 0;
+    max-height: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 0 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8fa 0%,
+            #fff1f5 100%
+        );
+
+    opacity: 0;
+
+    transform: translateY(50px);
+
+    pointer-events: none;
+    overflow: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+/* Quando aparecer */
+
+.message.show {
+    min-height: 100svh;
+    max-height: none;
+    padding: clamp(72px, 12vw, 100px) 16px;
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+.message-container {
+    width: min(700px, 100%);
+
+    padding: clamp(42px, 8vw, 70px) clamp(22px, 6vw, 50px);
+
+    text-align: center;
+
+    background:
+        rgba(255, 255, 255, 0.65);
+
+    border:
+        1px solid rgba(225, 180, 195, 0.35);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 20px 60px rgba(140, 90, 110, 0.08);
+}
+
+
+.little-flower {
+    display: block;
+
+    font-size: 38px;
+
+    margin-bottom: 20px;
+}
+
+
+.subtitle {
+    color: #a7838f;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+
+h1 {
+    margin-top: 15px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(34px, 10vw, 62px);
+
+    font-weight: 500;
+
+    color: #805666;
+    overflow-wrap: anywhere;
+}
+
+
+.divider {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 25px 0;
+
+    color: #d99aad;
+}
+
+
+.main-text {
+    max-width: 560px;
+
+    margin: 18px auto;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color: #765e67;
+}
+
+
+.highlight {
+    margin: 35px 0;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(24px, 7vw, 28px);
+
+    color: #bd7189;
+}
+
+
+.flowers {
+    margin-top: 35px;
+
+    font-size: clamp(24px, 8vw, 30px);
+
+    letter-spacing: clamp(4px, 2vw, 8px);
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-message {
+    min-height: 70vh;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: clamp(64px, 12vw, 80px) 16px;
+
+    background: #f9e8ee;
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+.message-open .final-message {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.final-card {
+    max-width: 550px;
+    width: min(100%, 550px);
+
+    text-align: center;
+
+    padding: clamp(40px, 8vw, 60px) clamp(20px, 7vw, 40px);
+}
+
+
+.final-heart {
+    display: block;
+
+    margin-bottom: 20px;
+
+    font-size: 50px;
+
+    color: #c87891;
+}
+
+
+.final-card h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(32px, 9vw, 40px);
+
+    font-weight: 500;
+
+    color: #805666;
+}
+
+
+.final-card p {
+    margin-top: 20px;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+
+    color: #765e67;
+}
+
+
+.final-decoration {
+    margin: 30px 0;
+
+    color: #c87891;
+
+    letter-spacing: 10px;
+}
+
+
+.signature {
+    font-family: "Playfair Display", serif;
+
+    font-size: 18px;
+
+    color: #9c6878;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+
+    .letter {
+        --letter-width: min(300px, calc(100vw - 40px));
+    }
+
+
+    .letter-content p,
+    .letter-title {
+        font-size: 23px;
+    }
+
+
+    .message-container {
+        padding: 50px 25px;
+    }
+
+
+    .main-text {
+        font-size: 15px;
+    }
+
+
+    .final-card {
+        padding: 40px 20px;
+    }
+
+
+    .final-card h2 {
+        font-size: 32px;
+    }
+
+
+    .heart-1 {
+        left: 5%;
+    }
+
+
+    .heart-2 {
+        right: 5%;
+    }
+
+
+    .flower-1 {
+        left: 3%;
+    }
+
+
+    .flower-2 {
+        right: 3%;
+    }
+}
+
